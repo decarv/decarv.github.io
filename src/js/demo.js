@@ -22,14 +22,20 @@ function displayHashifyDiv() {
 // Problema: A função recebe um hash, não uma string. Eu quero então pegar minha
 // string e passar pelo hash e só depois criar o objeto.
 function regenAnimation() {
+  	const pass = document.getElementById('passwordField').value;
+		const parent = "#hashifyDiv"
     if (document.getElementById('hashifyDiv').style.display === 'none') {
       return;
     }
+		// Password vazio nao carrega animacao
+		if (pass === "") {
+			$(parent).empty()
+			return;
+		}
 
-    const pass = document.getElementById('passwordField').value;
     const hashAlgorithm = "SHA-256";
     const animation = hashify.seed(pass, salt="", hashAlgorithm, "TEXT");
-    animation.prepAnimation("#hashifyDiv", [1, 4], [2, 2],
+    animation.prepAnimation(parent, [1, 4], [2, 2],
         { ...DEFAULT_OPTS,
           loop: 0, // create infinite loop
           x: 0,
@@ -44,9 +50,6 @@ function regenAnimation() {
 
     const tl = new mojs.Timeline();
     tl.add(animation.timeline);
-    console.log(tl);
-    console.log(animation);
-    console.log(animation.timeline);
     tl.play();
 }
 
