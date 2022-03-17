@@ -33,6 +33,7 @@ function regenAnimation() {
 			$(parent).empty()
 			return;
 		}
+	  console.log(password)
 
     const hashAlgorithm = "SHA-256";
     const animation = hashify.seed(hash=password, salt=username, hashAlgorithm, "TEXT");
