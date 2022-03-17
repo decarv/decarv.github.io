@@ -1,5 +1,5 @@
 
-const passwordMinLength = 8
+const passwordMinLength = 4; // TODO:
 
 function createHashifyDiv(loginFieldsDiv) {
   const hashifyDiv = document.createElement('div');
@@ -22,19 +22,20 @@ function displayHashifyDiv() {
 // Problema: A função recebe um hash, não uma string. Eu quero então pegar minha
 // string e passar pelo hash e só depois criar o objeto.
 function regenAnimation() {
-  	const pass = document.getElementById('passwordField').value;
-		const parent = "#hashifyDiv"
+  	const password = document.getElementById('passwordField').value;
+    const username = document.getElementById('usernameField').value;
+		const parent = "#hashifyDiv";
     if (document.getElementById('hashifyDiv').style.display === 'none') {
       return;
     }
 		// Password vazio nao carrega animacao
-		if (pass === "") {
+		if (password === "" || username === "") {
 			$(parent).empty()
 			return;
 		}
 
     const hashAlgorithm = "SHA-256";
-    const animation = hashify.seed(pass, salt="", hashAlgorithm, "TEXT");
+    const animation = hashify.seed(hash=password, salt=username, hashAlgorithm, "TEXT");
     animation.prepAnimation(parent, [1, 4], [2, 2],
         { ...DEFAULT_OPTS,
           loop: 0, // create infinite loop
@@ -59,6 +60,8 @@ const hashifyButton = document.getElementById('hashifyButton');
 hashifyButton.addEventListener('click', displayHashifyDiv);
 const passField = document.getElementById('passwordField');
 passField.addEventListener('input', regenAnimation);
+const usernameField = document.getElementById('usernameField');
+usernameField.addEventListener('input', regenAnimation);
 
 // TODO: A ideia 'e desenhar os objetos SVG em um canvas usando as informacoes
 // que ja constam nos objetos. Depois, exportar isso como GIF usando uma lib.

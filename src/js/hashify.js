@@ -20,6 +20,17 @@ const COLORS = {
   hotpink: 'deeppink',
 };
 
+const ACCESSIBLE_COLORS = {
+  white: '#ffffff',
+  black: '#000000',
+  green: '#49F2CC', // change
+  lightGrey: '#ddd',
+  grey: '#29363B',
+  cyan: 'cyan',
+  yellow: '#FFE202',
+  hotpink: 'deeppink', // change
+};
+
 function getChar(opts, char, x, y, randomOpts = {}) {
   var char_shape = new mojs.Shape({
     ...opts,
@@ -75,8 +86,9 @@ AVAILABLE_CHARS = ['B', 'C', 'D', 'E', 'F', 'G', 'H', 'J',
   'K', 'L', 'M', 'N', 'O', 'P', 'R', 'S', 'T', 'U', 'V', 'W',
   'X', 'Y', 'Z', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
-let defaultBaseCharSize = 25;
-let defaultBaseIconSize = 50;
+// TODO: Create a CANVAS with these specs
+let defaultBaseCharSize = 20;
+let defaultBaseIconSize = 40;
 DEFAULT_OPTS = {
   x: 0,
   y: 0,
@@ -101,42 +113,28 @@ class hashify {
     this.generator = generator();
   }
 
-  /** TODO:
+  /** TODO [HAC]: DOCUMENT CHANGES
    * Defines an object with a hashing generator. Example: hashify.seed("1212")
    * @param {string} hash Hex string of the starting hash
    * @param {string} salt Text of the salt
    * @param {string} hashalg SHA variant. Valid options: "SHA-1", "SHA-256", "SHA-512"
    */
-  static seed(hash, salt = "",  hashalg = "SHA-256", hashfmt = "HEX", saltfmt = "TEXT") {
-    var sha_gen = function* () {
-      var saltHasher = new jsSHA(
-        hashalg,
-        saltfmt
-      );
+  static seed(hash, salt = "",  hashAlgorithm = "SHA-256", hashFormat = "HEX", saltFormat = "TEXT") {
+    const shaGenerator = function* () {
+      const saltHasher = new jsSHA(hashAlgorithm, saltFormat);
       saltHasher.update(salt);
-      let saltHex = saltHasher.getHash("HEX");
+      const saltHex = saltHasher.getHash("HEX");
 
-      var hashObj = new jsSHA(
-        hashalg,
-        hashfmt
-      );
-
-      // we set the initial state
-      //hashObj.update(hash);
-      let current_state = hash;
+      let hashObject;
+      let currentState = hash;
       while (true) {
-        var hashObj = new jsSHA(
-          hashalg,
-          hashfmt
-        );
-        hashObj.update(current_state + saltHex);
-        current_state = hashObj.getHash("HEX");
-
-        yield BigInt("0x" + current_state);
+        hashObject = new jsSHA(hashAlgorithm, hashFormat);
+        hashObject.update(currentState + saltHex);
+        currentState = hashObject.getHash("HEX");
+        yield BigInt("0x" + currentState);
       }
     }
-
-    return new hashify(sha_gen);
+    return new hashify(shaGenerator);
   }
 
   /**
@@ -183,7 +181,7 @@ class hashify {
     $(parent).empty();
 
     // We create a new timeline
-    var timeline = this.getNewTimeline(options);
+    let timeline = this.getNewTimeline(options);
 
     let availableIcons = Object.keys(options.icon_generators);
     let optsWithParent = { ...options, parent: parent };
@@ -197,10 +195,10 @@ class hashify {
 
     // Generating the letters
     const availableCharsLength = BigInt(AVAILABLE_CHARS.length);
-    for (var i = 0; i < letters_grid[0]; i++) {
+    for (let i = 0; i < letters_grid[0]; i++) {
       let deltaX = -1 * (letters_grid[1] - 1) * options.xTxtSpacing / 2; // center this char line
 
-      for (var j = 0; j < letters_grid[1]; j++) {
+      for (let j = 0; j < letters_grid[1]; j++) {
         let n = Remainder(this.generator.next().value, availableCharsLength);
         addText(AVAILABLE_CHARS[n], timeline, options.x + deltaX, options.y + deltaY,
           {
@@ -219,10 +217,10 @@ class hashify {
 
     // Generating the icons
     let availableIconsLength = BigInt(availableIcons.length);
-    for (var i = 0; i < images_grid[0]; i++) {
+    for (let i = 0; i < images_grid[0]; i++) {
       let deltaX = -1 * (images_grid[1] - 1) * options.xIconSpacing / 2; // center this icon line
 
-      for (var j = 0; j < images_grid[1]; j++) {
+      for (let j = 0; j < images_grid[1]; j++) {
         // Select a value from the generator and take the modulo of the available icons
         let n = Remainder(this.generator.next().value, availableIconsLength);
 
