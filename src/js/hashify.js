@@ -86,7 +86,6 @@ AVAILABLE_CHARS = ['B', 'C', 'D', 'E', 'F', 'G', 'H', 'J',
   'K', 'L', 'M', 'N', 'O', 'P', 'R', 'S', 'T', 'U', 'V', 'W',
   'X', 'Y', 'Z', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
-// TODO: Create a CANVAS with these specs
 let defaultBaseCharSize = 20;
 let defaultBaseIconSize = 40;
 DEFAULT_OPTS = {
@@ -113,7 +112,7 @@ class hashify {
     this.generator = generator();
   }
 
-  /** TODO [HAC]: DOCUMENT CHANGES
+  /** 
    * Defines an object with a hashing generator. Example: hashify.seed("1212")
    * @param {string} hash Hex string of the starting hash
    * @param {string} salt Text of the salt
