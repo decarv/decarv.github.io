@@ -2,33 +2,17 @@
 <html lang="pt-BR">
 <meta name="viewport" content="initial-scale=1">
 <head>
+	<script type="text/javascript" src="src/js/success.js" defer></script>
+	<link rel=stylesheet href="src/css/custom.css">
 </head>
 <body>
 	<div class="header">
-		<h1 class="header"> Sucesso! </h1>
+		<h1 class="header"> Login bem sucedido! </h1>
 	</div>
-	<div class="box">
-		<form class="form">
-			<div class="login-fields" id="loginFields">
-				<div class="username field">
-					<input type="text" name="username" id="usernameField" placeholder="Usuario"></input>
-				</div>
-				<div class="password field">
-					<input type="password" name="password" id="passwordField" placeholder="Senha"></input>
-				</div>
-			</div>
-			<div class="login button">
-				<button class="login button" name="login" type="submit">
-					Entrar
-				</button>
-			</div>
-			<div class="hashify button">
-				<button class="hashify button" id="hashifyButton" name="hashify" type="button">
-					Hashify
-				</button>
-			</div>
-		</form>
+	<div class="login button">
+		<button id="returnToMainButton" name="returnButton" type="button">
+			Retornar
+		</button>
 	</div>
-	<canvas id="canvas"></canvas>
 </body>
 </html>

@@ -76,10 +76,7 @@ function regenAnimation() {
 
 function jsSubmit(e) {
   e.preventDefault();
-  // processa os dados
-  // TODO
 
-  // aqui vc pode até fazer o redirecionamento da página para a página de login bem sucedido
   window.location = "success.html";
   return false;
 }
@@ -92,4 +89,3 @@ const passField = document.getElementById('passwordField');
 passField.addEventListener('input', regenAnimation);
 const usernameField = document.getElementById('usernameField');
 usernameField.addEventListener('input', regenAnimation);
-
