@@ -1,4 +1,4 @@
-/** 
+/* 
  * Autor: Henrique de Carvalho <henriquecarvalho@usp.br>
  * 
  * Esse script é uma demonstração de como o Hashify.js poderia ser utilizado
@@ -72,6 +72,16 @@ function regenAnimation() {
     const tl = new mojs.Timeline();
     tl.add(animation.timeline);
     tl.play();
+}
+
+function jsSubmit(e) {
+  e.preventDefault();
+  // processa os dados
+  // TODO
+
+  // aqui vc pode até fazer o redirecionamento da página para a página de login bem sucedido
+  window.location = "success.html";
+  return false;
 }
 
 const loginFieldsDiv = document.getElementById('loginFields');
