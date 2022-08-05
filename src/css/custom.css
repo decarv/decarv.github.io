@@ -8,3 +8,11 @@ body {
   min-width: 500px;
   margin: 0 auto;
 }
+
+h1.header {
+  text-align: center;
+}
+
+.box {
+  text-align: center;
+}
