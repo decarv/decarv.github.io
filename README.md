@@ -1,12 +1,10 @@
-# Página Exemplo de Login com Hashify.js
+# Página Exemplo de Login com HashifyPass
 
-Este repositório contém uma página de demonstração de uso do Hashify.js para realizar login.
-O Hashify.js pode ser encontrado em https://gitlab.com/jorgemiguelribeiro92/hashify
-
-## Arquivos Modificados
-
-`src/js/hashify.js` : define a classe Hashify.js <br>
-`src/js/demo.js` : cria os objetos de Hashify.js e carrega as animações
+Este repositório contém uma página de demonstração de uso do [HashifyPass](https://github.com/decarv/hashify-pass) para realizar login.
 
 ## Autor
-Henrique de Carvalho 
+Henrique de Carvalho
+
+## Licença
+
+O software deste repositório é distribuído sob a Licença MIT, que pode ser encontrada no arquivo LICENSE.
