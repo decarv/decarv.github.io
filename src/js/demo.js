@@ -83,7 +83,7 @@ function jsSubmit(e) {
 
 const loginFieldsDiv = document.getElementById('loginFields');
 createHashifyDiv(loginFieldsDiv);
-const hashifyButton = document.getElementById('hashifyButton');
+const hashifyButton = document.getElementById('hashifyPassButton');
 hashifyButton.addEventListener('click', displayHashifyDiv);
 const passField = document.getElementById('passwordField');
 passField.addEventListener('input', regenAnimation);
