@@ -20,17 +20,6 @@ const COLORS = {
   hotpink: 'deeppink',
 };
 
-const ACCESSIBLE_COLORS = {
-  white: '#ffffff',
-  black: '#000000',
-  green: '#49F2CC', // change
-  lightGrey: '#ddd',
-  grey: '#29363B',
-  cyan: 'cyan',
-  yellow: '#FFE202',
-  hotpink: 'deeppink', // change
-};
-
 function getChar(opts, char, x, y, randomOpts = {}) {
   var char_shape = new mojs.Shape({
     ...opts,
@@ -112,7 +101,7 @@ class hashify {
     this.generator = generator();
   }
 
-  /** 
+  /**
    * Defines an object with a hashing generator. Example: hashify.seed("1212")
    * @param {string} hash Hex string of the starting hash
    * @param {string} salt Text of the salt
@@ -123,7 +112,6 @@ class hashify {
       const saltHasher = new jsSHA(hashAlgorithm, saltFormat);
       saltHasher.update(salt);
       const saltHex = saltHasher.getHash("HEX");
-
       let hashObject;
       let currentState = hash;
       while (true) {
@@ -169,7 +157,7 @@ class hashify {
    * @param {Object} options Customizable options, like position
    */
   prepAnimation(parent, letters_grid = [1, 4], images_grid = [2, 2], options = DEFAULT_OPTS) {
-
+    // Verifying that everything whe need is ok
     try {
       BigInt(1);
     } catch (e) {
@@ -180,7 +168,7 @@ class hashify {
     $(parent).empty();
 
     // We create a new timeline
-    let timeline = this.getNewTimeline(options);
+    var timeline = this.getNewTimeline(options);
 
     let availableIcons = Object.keys(options.icon_generators);
     let optsWithParent = { ...options, parent: parent };
@@ -194,10 +182,10 @@ class hashify {
 
     // Generating the letters
     const availableCharsLength = BigInt(AVAILABLE_CHARS.length);
-    for (let i = 0; i < letters_grid[0]; i++) {
+    for (var i = 0; i < letters_grid[0]; i++) {
       let deltaX = -1 * (letters_grid[1] - 1) * options.xTxtSpacing / 2; // center this char line
 
-      for (let j = 0; j < letters_grid[1]; j++) {
+      for (var j = 0; j < letters_grid[1]; j++) {
         let n = Remainder(this.generator.next().value, availableCharsLength);
         addText(AVAILABLE_CHARS[n], timeline, options.x + deltaX, options.y + deltaY,
           {
@@ -216,10 +204,10 @@ class hashify {
 
     // Generating the icons
     let availableIconsLength = BigInt(availableIcons.length);
-    for (let i = 0; i < images_grid[0]; i++) {
+    for (var i = 0; i < images_grid[0]; i++) {
       let deltaX = -1 * (images_grid[1] - 1) * options.xIconSpacing / 2; // center this icon line
 
-      for (let j = 0; j < images_grid[1]; j++) {
+      for (var j = 0; j < images_grid[1]; j++) {
         // Select a value from the generator and take the modulo of the available icons
         let n = Remainder(this.generator.next().value, availableIconsLength);
 
@@ -284,3 +272,7 @@ class hashify {
     return timeline;
   }
 }
+
+//a = hashify.seed("121213").animate("#svgDiv", letters_grid = [2, 5], images_grid = [5, 5]);
+//a = hashify.seed("121213").animate("#svgDiv");
+
